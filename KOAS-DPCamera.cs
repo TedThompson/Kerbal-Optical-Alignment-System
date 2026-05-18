@@ -197,12 +197,12 @@ namespace DPCamera
 				this.unsetDPCam ();
 				unlockReady = true;
 			}
-			if (unlockReady && (Input.GetKeyUp (GameSettings.CAMERA_MODE.primary) || GameSettings.FOCUS_NEXT_VESSEL.GetKeyUp () || GameSettings.FOCUS_PREV_VESSEL.GetKeyUp ())) {
+			if (unlockReady && (GameSettings.CAMERA_MODE.GetKeyUp (true) || GameSettings.FOCUS_NEXT_VESSEL.GetKeyUp () || GameSettings.FOCUS_PREV_VESSEL.GetKeyUp ())) {
 				InputLockManager.RemoveControlLock ("DPCamLock");
 				unlockReady = false;
 			}
 			if (inDPCam) {
-				if (!MapView.MapIsEnabled && (Input.GetKeyDown (GameSettings.CAMERA_MODE.primary) || GameSettings.FOCUS_NEXT_VESSEL.GetKeyDown () || GameSettings.FOCUS_PREV_VESSEL.GetKeyDown ())) {
+				if (!MapView.MapIsEnabled && (GameSettings.CAMERA_MODE.GetKeyDown (true) || GameSettings.FOCUS_NEXT_VESSEL.GetKeyDown () || GameSettings.FOCUS_PREV_VESSEL.GetKeyDown ())) {
 					printToLog ("Keypress Detected", 1);
 					if (CameraManager.Instance.currentCameraMode == CameraManager.CameraMode.IVA) {
 						CameraManager.Instance.SetCameraMode (CameraManager.CameraMode.Flight);
@@ -239,7 +239,7 @@ namespace DPCamera
 					mapWasActive = false;
 				}
 			} else {
-				if (Input.GetKeyUp (GameSettings.CAMERA_MODE.primary) && InputLockManager.IsLocked (ControlTypes.CAMERAMODES)) {
+				if (GameSettings.CAMERA_MODE.GetKeyUp (true) && InputLockManager.IsLocked (ControlTypes.CAMERAMODES)) {
 					printToLog ("Cam Key released with lock still set", 1);
 				}
 			}
